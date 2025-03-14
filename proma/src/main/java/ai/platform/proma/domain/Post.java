@@ -63,4 +63,13 @@ public class Post {
         this.postCategory = post.getPostCategory();
     }
 
+    public Post toEntity(){
+        return Post.builder()
+                .postTitle(postTitle)
+                .postDescription(postDescription)
+                .postCategory(postCategory)
+                .prompt(prompt)
+                .build();
+    }
+
 }
