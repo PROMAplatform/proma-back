@@ -4,11 +4,8 @@ import ai.platform.proma.domain.Post;
 import ai.platform.proma.domain.PromptMethods;
 import ai.platform.proma.domain.enums.PromptCategory;
 import ai.platform.proma.dto.response.SortInfo;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +36,16 @@ public class PostRepositoryImpl implements PostRepository{
     @Override
     public Optional<Post> findById(Long postId) {
         return postJpaRepository.findById(postId).map(Post::toEntity);
+    }
+
+    @Override
+    public Post save(Post post) {
+        return postJpaRepository.save(post);
+    }
+
+    @Override
+    public void delete(Post post) {
+        postJpaRepository.delete(post);
     }
 
 }

@@ -12,7 +12,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@Repository
 public interface PostJpaRepository extends JpaRepository<Post,Long> {
 
     @Query("SELECT p AS post, COALESCE(COUNT(l.id), 0) AS likeCount " +

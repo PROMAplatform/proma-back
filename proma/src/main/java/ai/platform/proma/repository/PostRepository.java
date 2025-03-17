@@ -28,4 +28,8 @@ public interface PostRepository {
                                                     Pageable pageable);
 
     Optional<Post> findById(Long postId);
+
+    Post save(Post post);
+
+    void delete(Post post);
 }
