@@ -4,7 +4,9 @@ import ai.platform.proma.domain.Post;
 import ai.platform.proma.domain.enums.PromptCategory;
 import ai.platform.proma.validation.ValidEnum;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
+@Builder
 public record PostRequestDto(
         @NotNull(message = "postTitle must not be null")
         String postTitle,

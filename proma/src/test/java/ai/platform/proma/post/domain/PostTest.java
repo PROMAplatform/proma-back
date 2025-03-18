@@ -4,9 +4,12 @@ import ai.platform.proma.domain.Post;
 import ai.platform.proma.domain.Prompt;
 import ai.platform.proma.domain.enums.PromptCategory;
 import ai.platform.proma.dto.request.PostRequestDto;
+import ai.platform.proma.exception.ApiException;
+import ai.platform.proma.exception.ErrorDefine;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PostTest {
     @Test
@@ -41,5 +44,25 @@ public class PostTest {
         assertThat(post.getPostDescription()).isEqualTo("UpdateDescription");
         assertThat(post.getPostCategory()).isEqualTo(PromptCategory.fromValue("ART"));
     }
+    @Test
+    void update_메서드에서_Post가_NULL이면_에러를_던진다() {
+        Prompt prompt = Prompt.builder()
+                .id(1L)
+                .promptTitle("promptTitle")
+                .promptDescription("promptDescription")
+                .promptCategory(PromptCategory.IT)
+                .build();
 
+        Post post = Post.builder()
+                .postTitle("Title")
+                .postDescription("Description")
+                .postCategory(PromptCategory.ART)
+                .prompt(prompt)
+                .build();
+
+        System.out.println(ErrorDefine.NULL_POST_ERROR.getMessage());
+
+        assertThatThrownBy(() -> post.update(null))
+                .isInstanceOf(ApiException.class);
+    }
 }

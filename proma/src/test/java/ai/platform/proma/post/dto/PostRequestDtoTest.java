@@ -1,6 +1,5 @@
 package ai.platform.proma.post.dto;
 
-import ai.platform.proma.domain.enums.PromptCategory;
 import ai.platform.proma.dto.request.PostRequestDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
