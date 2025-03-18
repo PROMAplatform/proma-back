@@ -51,7 +51,8 @@ public class Post {
     private List<Like> likes;
 
     @Builder
-    public Post(String postTitle, String postDescription, PromptCategory postCategory, Prompt prompt) {
+    public Post(Long id, String postTitle, String postDescription, PromptCategory postCategory, Prompt prompt) {
+        this.id = id;
         this.postTitle = postTitle;
         this.postDescription = postDescription;
         this.createAt = LocalDateTime.now();

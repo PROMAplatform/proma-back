@@ -1,5 +1,6 @@
 package ai.platform.proma.repository;
 
+import ai.platform.proma.domain.Post;
 import ai.platform.proma.domain.User;
 import ai.platform.proma.domain.enums.UserLoginMethod;
 import ai.platform.proma.security.UserLoginForm;
@@ -12,14 +13,16 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("SELECT b.socialId as id, b.role AS role FROM User b WHERE b.socialId = :socialId AND  b.refreshToken is not null")
-    Optional<UserLoginForm> findBySocialIdAndRefreshToken(@Param("socialId") String socialId);
+public interface UserRepository {
+    Optional<UserLoginForm> findBySocialIdAndRefreshToken(String socialId);
 
-    @Query("SELECT b.socialId as id, b.role AS role FROM User b WHERE b.socialId = :socialId AND b.refreshToken = :refreshToken")
-    Optional<UserLoginForm> findBySocialIdAndRefreshToken(@Param("socialId") String socialId, @Param("refreshToken") String refreshToken);
+    Optional<UserLoginForm> findBySocialIdAndRefreshToken(String socialId, String refreshToken);
 
     Optional<User> findBySocialIdAndRefreshTokenIsNotNullAndIsLoginIsTrue(String socialId);
 
     User findBySocialIdAndUserLoginMethod(String socialId, UserLoginMethod userLoginMethod);
-}
 
+    Optional<User> findById(Long userId);
+
+    User save(User user);
+}
