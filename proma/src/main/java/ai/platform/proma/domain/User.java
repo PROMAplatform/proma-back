@@ -70,7 +70,8 @@ public class User {
     private List<BlockHistory> blockHistories;
 
     @Builder
-    public User(String userLoginId, String userName, UserLoginMethod userLoginMethod, String socialId) {
+    public User(Long id, String userLoginId, String userName, UserLoginMethod userLoginMethod, String socialId) {
+        this.id = id;
         this.userLoginId = userLoginId;
         this.userName = userName;
         this.userLoginMethod = userLoginMethod;

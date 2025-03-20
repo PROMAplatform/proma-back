@@ -7,6 +7,7 @@ import ai.platform.proma.exception.ErrorDefine;
 import ai.platform.proma.repository.PostRepository;
 import ai.platform.proma.repository.UserRepository;
 import ai.platform.proma.usecase.post.PostDeletePostUseCase;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Builder
 public class PostDeletePostService implements PostDeletePostUseCase {
 
     private final PostRepository postRepository;

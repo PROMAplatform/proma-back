@@ -2,6 +2,8 @@ package ai.platform.proma.domain;
 
 import ai.platform.proma.domain.enums.PromptCategory;
 import ai.platform.proma.dto.request.PostRequestDto;
+import ai.platform.proma.exception.ApiException;
+import ai.platform.proma.exception.ErrorDefine;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -49,7 +51,8 @@ public class Post {
     private List<Like> likes;
 
     @Builder
-    public Post(String postTitle, String postDescription, PromptCategory postCategory, Prompt prompt) {
+    public Post(Long id, String postTitle, String postDescription, PromptCategory postCategory, Prompt prompt) {
+        this.id = id;
         this.postTitle = postTitle;
         this.postDescription = postDescription;
         this.createAt = LocalDateTime.now();
@@ -58,9 +61,21 @@ public class Post {
     }
 
     public void update(Post post) {
+        if (post == null) {
+            throw new ApiException(ErrorDefine.NULL_POST_ERROR);
+        }
         this.postTitle = post.getPostTitle();
         this.postDescription = post.getPostDescription();
         this.postCategory = post.getPostCategory();
+    }
+
+    public Post toEntity(){
+        return Post.builder()
+                .postTitle(postTitle)
+                .postDescription(postDescription)
+                .postCategory(postCategory)
+                .prompt(prompt)
+                .build();
     }
 
 }
